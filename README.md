@@ -1,8 +1,15 @@
-# Muscle-Synergy
-Extraction Muscle synergy in EMG sensor
-this code is Patient-specific functional electrical stimulation strategy based on muscle synergy and walking posture analysis for gait rehabilitation of stroke patients
-in journal of international medical research
-matlab code in extract_muscle_synergy folder is extracting msucle synergy in sEMG sensor data
-matlab code is composed normal nmf, W,H fixed nmf
-c++ file in muscle synergy-FES-cpp file folder is real time FES stimulation strategy based on muscle synergy
-entire file failed to upload due to file size issue. that file executing in MFC program and needed xsens sensor and FES device (Rehasim3;HASOMED GmbH)
+ROS2 study
+
+현재 문제
+-ROS1 이 돌아가는 wsl 이 이미 있는 상태이기 때문에 wsl을 하나 더 설치하거나 혹은 docker 를 이용해서 ROS2는 이미지를 따로 만들어서 할지 고민중
+-> docker 이미지를 직접만들고 관리 or 그냥 ubuntu20.04 docker image를 가져와서 작업을 해야되나 
+
+-> wsl2 -> docker Ubuntu20.04에서 작업진행
+https://docs.docker.com/go/wsl2/
+
+docker image : docekr pull homebrew/ubuntu20.04
+
+shell scrip를 통해서 설치방법, 설정들을 저장
+아마도 이 깃은 shell script로 대부분이 채워질듯..?
+
+docker iamge to container (run 명령어 -> 파일위치 마운트 해야함)-1.03
