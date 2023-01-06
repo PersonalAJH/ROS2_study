@@ -12,5 +12,5 @@ docker image : docekr pull homebrew/ubuntu20.04
 shell scrip를 통해서 설치방법, 설정들을 저장
 아마도 이 깃은 shell script로 대부분이 채워질듯..?
 
-docker iamge to container (run 명령어 -> 파일위치 마운트 해야함)-1.03
+docker iamge to container (run 명령어 -> 파일위치 마운트 해야함)
 docker run -it -v /home/root:/root --name auto_start 
