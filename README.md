@@ -14,3 +14,7 @@ shell scrip를 통해서 설치방법, 설정들을 저장
 
 docker iamge to container (run 명령어 -> 파일위치 마운트 해야함)-1.03
 docker run -it -v /home/root:/root --name auto_start 
+
+컨테이너를 처음만들면 어떤 컨테이너들은 sudo 명령도 안먹고 apt-get update도 안되는 경우가 발생하는데 docker 에 들어갈 때 root 계정으로 접속 할 수 있다.
+
+docker exec -it --user root auto_start bash
