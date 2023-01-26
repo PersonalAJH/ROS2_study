@@ -1,0 +1,62 @@
+QoS  : Quailty of Service
+
+Option 종류 : Reliability(데이터 손실을 막기위해 다시 순차적으로 보내거나 하는 식의 옵션), History(통신 상태에 따라 정해진 크기 만큼의 데이터를 보관), Durability(데이터를 수신하는 Subscriber가 생성 되기 전의 데이터를 사용할지 폐기할지 결정),
+ Deadline(정해진 주기 안에 데이터가 발신 및 수신되지 않을 경우 이벤트 함수를 실행), Lifespan(정해진 주기 안에서 수신되는 데이터만 유효판정하고 그렇지 않은 데이터는 삭제), Liveliness(정해진 주기 안에서 노드 혹은 토픽의 생사를 확인)
+
+
+
+1. History
+
+    1.1 Option
+        KEEP_LAST : 정해진 메세지 큐 크기만큼의 데이터를 보관
+        KEEP_ALL  : 모든 데이터를 보관
+
+    1.2 Example
+        rclcpp::QoS(rclcpp::KeepLast(10));
+        qos_profile = QoSProfile(history=QoSHistoryPolicy.KEEP_LAST, depth = 10)      // python
+
+2. Reliability
+    2.1 Option
+        BEST_EFFORT 데이터 송신에 집중, 전송 속도를 중시하며 네트워크 상태에 따라 유실이 발생할 수 있음
+        RELIABLE 데이터 수신에 집중, 신뢰성을 중시하며 유실이 발생하면 재전송을 통해 수신을 보장함
+
+    2.2 Example
+        rclcpp::QoS(rclcpp::KeepAll).best_effort();
+        qos_profile = QoSProfile(reliability=QoSReliabilityPolicy.BEST_EFFORT)
+
+3. Durability  
+    3.1 Option
+        TRANSIENT_LOCAL Subscription이 생성되기 전의 데이터도 보관(Publisher 에만 적용 가능)
+        VOLATILE  Subscriber이 생성되기 전의 데이터는 무효
+    3.2 Example
+        rclcpp::QoS(rclcpp::Keep_All).transient_local();
+        qos_profile = QoSProfile(durability = QoSDurabilityPolicy.TRANSIENT_LOCAL)
+
+4. Deadline
+    4.1 Option
+        deadline_duration Deadline을 확인해 주는 주기
+
+    4.2 Example
+        rclcpp::QoS(10).deadline(100ms);
+        qos_profile = QoSProfile(depth = 10, deadline==Duration(0.1))
+
+5. Lifespan
+    5.1 Option
+        lifespan_duration Lifespan을 확인하는 주기
+
+    5.2 Example
+        rclcpp::QoS(10).reliable().transient_local().lifespan(10ms);
+        qos_profile = QoSProfile(lifespan = Duration(0.01))
+
+6. Liveliness
+    6.1 Option
+        liveliness 자동 또는 메뉴얼로 확인할지 지정하는 옵션 (AUTOMATIC, MANUAL_BY_NODE, MANUAL_BY_TOPIC 3가지 옵션)
+        lease_duration Liveness 를 확인하는 주기
+    
+    6.2 Example
+        rclcpp::QoS qos_profile(10);
+        qos_profile
+        -liveliness(RMW_QOS_POLICY_LIVELINESS_AUTOMATIC)
+        -liveliness_lease_duration(1000ms);
+
+        
