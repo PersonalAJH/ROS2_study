@@ -22,3 +22,14 @@ ros2 topic pub --once /turtle1/cmd_vel geometry_msgs/msg/Twist "{linear: {x:2.0,
 
 #내가 쓰는 방법은 --once 이후부분을 yaml 파일로 대체하여 사용
 # --once 대신 --rate 1 옵션을 추가하여 지속적으로 토픽을 쏴줄수도 있다.
+
+
+#토픽 서비스 액션 비교
+
+#           토픽      서비스      액션
+# 연속성      연속성      일회성      복합
+# 방향성      단방향      양방향      양방향
+# 동기성      비동기      동기        동기 + 비동기
+# 다자간      가능        1:1         1:1
+# 노드        Publisher  Server       Server
+#             Sublisher   Client      Client
