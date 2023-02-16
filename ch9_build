@@ -1,0 +1,16 @@
+ROS1의 빌드 시스템은 기본적으로 CMake를 사용하고 빌드 환경은 패키지 폴더의 CMakeLists.txt를 통해 기술->리눅스, 맥, 윈도우까지 지원하기 떄문
+ROS2에서는 새로운 빌드 시스템은 ament를 사용한다. 
+-ament_cmake 는 ROS1의 CMake의 업그레이드 버전이며 다른점으로는 파일 시스템에서 devel 공간을 사용하지 않는다는 것과 고유 환경설정을 사용할 수 있다는 것이다.
+
+패키지 생성
+ros2 pkg create [패키지이름] --build-type [빌드타입] --dependencies[의존하는 패키지1][의존하는 패키지2][의존더하는패키지들]
+-ros2 pkg create test_pkg_rclcpp --build-type ament_cmake
+
+패키지 빌드
+ROS2 는 ROS1 과달리 패키지별로 빌듷를 할수있는데 colcon 빌드 툴을 사용한다. 
+
+cd ~/rovot_ws && colcon buil --symlink-install
+cd ~/rovot_ws && colcon buil --symlink-install --packages-select [패키지 이름]
+cd ~/rovot_ws && colcon buil --symlink-install --packages-up-to [패키지 이름]
+
+빌드 시스템에 필요한 부가 기능은 ROS의 버전 컨트롤 시스템 툴인 vcstool, 의존성 관리툴인 rosdep, 바이너리 패키지 관리 툴인 bloom이 있다. 
