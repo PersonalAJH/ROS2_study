@@ -1,0 +1,18 @@
+ROs2 빌드에는 colcon 빌드툴을 사용하고 
+소스코드가 있는 workspace로 이동하고 colcon build 명령어로 전체를 빌드 
+
+1. 모든 패키지 빌드
+colcon build --symlink-install
+
+2. 특정 패키지 빌드
+colcon build --symlink-install --package-select [패키지이름1] [패키지 이름2]...
+
+3. 특정 패키지 및 의존성 패키지를 함께 빌드하는 방법
+colcon build --symlink-install --package-up-to [패키지 이름]
+
+
+현재 내 패키지 빌드
+colcon build --symlink-install --package-select python_pkg
+
+환경 설정 파일 불러오기 및 실행 가능한 노드의 설정
+~/ROS2_STUDY/install/local_setup.bash
