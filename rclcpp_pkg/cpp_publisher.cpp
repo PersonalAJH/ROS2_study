@@ -23,6 +23,7 @@ class cppPublisher : public rclcpp::Node
         auto msg = std_msgs::msg::String();
         msg.data = "Hello World: " + std::to_string(count++);
         RCLCPP_INFO(this->get_logger(), "Published message : '%s'",msg,data.c_str());
+        printf("test \n");
         helloworld_publisher->publish(msg);
     }
     rclcpp::TimerBase::SharedPtr timer_;
