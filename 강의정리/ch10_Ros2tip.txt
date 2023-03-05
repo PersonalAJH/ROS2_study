@@ -1,0 +1,17 @@
+ setup.bash VS local_setup.bash
+
+    underlay  VS overlay
+    - underlay는 ROS2에 종속적으로 깔려오는 설정으로 ros2_foxy와 같은 개발환경을 뜻하며 overlay는 그 위에서 사용자가 정하는 환경설정들을 말한다
+
+local_setup.bash는 이 스크립트가 위치해있는 경로(예 ~/robot_ws/)와 같은 패키지에서의 환경을 설정한다
+setup.bash는 현재 작업 공간이 빌드 될 때 환경에 제공된 다른 모든 작업 공간에 대한 스크립트를 포함하고 있다.(즉 overlay에 대한 설정 정보가지 포함)
+
+
+source /opt/ros/foxy/setup.bash
+source ~/ROS2_STUDY/install/local_setup.bash
+이 두줄을 ./bashrc에 넣어서 사용하는게 편안하다. 
+
+
+
+colcon_cd [패키지이름]
+- 현재 작업 디렉터리를 패키지 디렉터리로 빠르게 변경할 수 있다. (Ros1의 roscd 와 비슷)
