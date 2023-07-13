@@ -33,3 +33,4 @@ ros2 topic pub --once /turtle1/cmd_vel geometry_msgs/msg/Twist "{linear: {x:2.0,
 # 다자간      가능        1:1         1:1
 # 노드        Publisher  Server       Server
 #             Sublisher   Client      Client
+test

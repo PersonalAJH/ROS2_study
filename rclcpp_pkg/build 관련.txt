@@ -1,0 +1,9 @@
+workspace 내의 모든 패키지를 빌드
+
+colcon build --symlink-install
+
+특정패키지만 빌드
+colcon build --symlink-install --packages-select [패키지이름1] [패키지이름2]
+
+특정패키지 및 의존성 패키지를 함ㄲ ㅔ빌드
+colcon build --symlink-install --packages-up-to

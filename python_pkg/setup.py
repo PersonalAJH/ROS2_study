@@ -13,13 +13,15 @@ setup(
     ],
     install_requires=['setuptools'],
     zip_safe=True,
-    maintainer='root',
+    maintainer='junghwan',
     maintainer_email='personaljh3@gmail.com',
-    description='TODO: Package description',
-    license='TODO: License declaration',
+    description='TODO: maybe object detection',
+    license='TODO: Junghwan License',
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
+            'helloworld_publisher = python_pkg.helloworld_publisher:main',
+            'helloworld_subscriber = python_pkg.helloworld_subscriber:main'
         ],
     },
 )

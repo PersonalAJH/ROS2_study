@@ -1,0 +1,11 @@
+#goal
+flaot32 goal_sum
+
+===
+
+string[] all_formula
+float32 total_sum
+
+---
+#Feedback
+string[] formula
