@@ -1,6 +1,0 @@
-https://github.com/robotpilot/ros2-seminar-examples.git 참고
-
-colcon build --symlink-install --packages-select topic_service_action_rclcpp_example
-
-빌드의 문제가 없다면 ~/robot_ws/install/topic_service_action_rclcpp_example 폴더안에 ROS2 인터페이스를 사용하기 위한 파일들이 저장된다.
-(argument, operator, calculator, checker와 같은 실행 스크립트)
