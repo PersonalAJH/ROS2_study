@@ -20,4 +20,4 @@ rosidl_generate_interfaces(jh_string
 4. package.xml 파일 면경
 <build_export_depend>rosidl_default_runtime</build_export_depend>
 <exec_depend>rosidl_default_runtime</exec_depend>
-
+<member_of_group>rosidl_interface_packages</member_of_group>
