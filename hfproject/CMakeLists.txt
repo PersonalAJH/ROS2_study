@@ -1,59 +1,106 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.8)
 project(hfproject)
 
-# Default to C99
-if(NOT CMAKE_C_STANDARD)
-  set(CMAKE_C_STANDARD 99)
-endif()
-
-# Default to C++14
-if(NOT CMAKE_CXX_STANDARD)
-  set(CMAKE_CXX_STANDARD 14)
-endif()
-
-#Wall 옵션은 컴파일중에 warning을 띄울껀지에 대한 옵션
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
 endif()
 
+
+add_definitions(-D_LINUX)
+add_definitions(-DNON_MATLAB_PARSING)
+add_definitions(-DMAX_EXT_API_CONNECTIONS=255)
+add_definitions(-DEXPORT_FLAG)
+
+
+
+
 # find dependencies
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
+find_package(sensor_msgs REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(geometry_msgs REQUIRED)
 
-# customize  파일이 있을경우
-#set(msg_files
-#  "msg/Count.msg"
-#  )
 
-#set(srv_files
-#  "srv/Count.srv"
-#  )
+find_package(Eigen3 REQUIRED)
+include_directories(${EIGEN3_INCLUDE_DIR})
 
-#set(action_files
-#  "action/Count.action"
-#  )
+include_directories(
+	${ament_INCLUDE_DIRS}
+ 	${ament_INCLUDE_DIRS}/message
+  ${CMAKE_CURRENT_SOURCE_DIR}/include
+  # 현재
+	${PROJECT_SOURCE_DIR}/src
+)
 
 
-# include directory들 설정
-#include_directories(
-#  include
+add_library(testLib
+	src/ParameterGetter.cpp
+  # 라이브러리에 추가해야 할 파일들
+  # ${CMAKE_CURRENT_SOURCE_DIR}/Comm.cpp
+)
+
+add_executable(human_following_node
+	src/HumanFollowingNode.cpp
+)
+
+
+ament_target_dependencies(testLib
+ rclcpp sensor_msgs std_msgs geometry_msgs
+)
+
+
+ament_target_dependencies(human_following_node
+ rclcpp sensor_msgs std_msgs geometry_msgs
+)
+
+
+target_link_libraries(human_following_node
+  testLib
+  # 외부 라이브러리가 필요할 때의 예시 
+  # ${CMAKE_CURRENT_SOURCE_DIR}/include/libjsoncpp.a
+  ${ament_LIBRARIES}
+  rt
+)
+
+
+install(DIRECTORY launch param
+    DESTINATION share/${PROJECT_NAME}
+)
+
+
+#install(TARGETS human_following_node
+#   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+#   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+#   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 #)
 
-#set은 기본 CMAKE와 같이 =과 같은 설정
-#set(PUBLISHER_NODE_NAME publisher)
-#set(SUBSCRIBER_NODE_NAME subscriber)
-#set(dependencies
-#  "examples_msgs"
-#  "rclcpp"
-#)
+install(TARGETS human_following_node
+  DESTINATION lib/${PROJECT_NAME})
 
-add_executable(${PUBLISHER_NODE_NAME} src/publisher/main.cpp src/publisher/counter.cpp)
-ament_target_dependencies(${PUBLISHER_NODE_NAME} ${dependencies})
 
-add_executable(${SUBSCRIBER_NODE_NAME} src/subscriber/main.cpp src/subscriber/observer.cpp)
-ament_target_dependencies(${SUBSCRIBER_NODE_NAME} ${dependencies})
+
+## Mark cpp header files for installation
+# install(DIRECTORY include/${PROJECT_NAME}/
+#   DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
+#   FILES_MATCHING PATTERN "*.h"
+#   PATTERN ".svn" EXCLUDE
+# )
+
+## Mark other files for installation (e.g. launch and bag files, etc.)
+# install(FILES
+#   # myfile1
+#   # myfile2
+#   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+# )
+
+install(TARGETS testLib
+    DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+)
+
+
+
+
 
 
 
