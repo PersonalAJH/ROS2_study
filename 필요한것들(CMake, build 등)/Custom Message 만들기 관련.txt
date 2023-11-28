@@ -1,0 +1,23 @@
+custom meesage 관련 
+
+1. message package 만들기 
+ros2 pkg create jh_msgs
+
+2. message 파일 만들기 
+jh_msgs/msg/jh.msg
+
+jh.msg 
+std_msgs/std/String jh_string
+std_msgs/Int32 jh_int
+
+3. CMakeList 변경
+
+find_package(rosidl_default_generators REQUIRED)
+rosidl_generate_interfaces(jh_string
+  "msg/jh.msg"
+)
+
+4. package.xml 파일 면경
+<build_export_depend>rosidl_default_runtime</build_export_depend>
+<exec_depend>rosidl_default_runtime</exec_depend>
+<member_of_group>rosidl_interface_packages</member_of_group>
