@@ -1,3 +1,6 @@
 별 필요없는 내용이기도 한데 
 build 가 된애들중에서 node list 에 나오지 않는 경우 
 source /build/opt/ros/<distribution>/setup.bash 하고 해야 나옴
+
+docker 를 사용할 시에 exec 으로 실행하는 것에 ROS domain id 를 부여해야 하며 이게 같아야 ros2 topic pub, sub, list, echo 같은게 먹는다 
+docekr 에서 Domain id 를 run할 때 설정하는게 바람직하지만 안되더라도 ~/.bashrc 에서 처리해도 괜찮음
