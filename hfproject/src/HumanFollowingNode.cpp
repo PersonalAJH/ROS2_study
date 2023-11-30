@@ -38,7 +38,7 @@ int main(int argc, char** argv)
 	rclcpp::init(argc, argv);
 	auto node = rclcpp::Node::make_shared("Human_following");
 	
-	 HumanFollowingNode robot(node, 1);
+	 HumanFollowingNode robot(new TopicManager(node), 1);
 
 	rclcpp::Rate loop_rate(25); //40ms
 
