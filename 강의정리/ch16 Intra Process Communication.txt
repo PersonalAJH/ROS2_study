@@ -17,3 +17,22 @@ IPC는 rclcpp 에서만 지원한다
 https:://github.com/ros2/demos/blob/foxy/intra_process_demo/include/image_pipeline/camera_node.hpp
 https:://github.com/ros2/demos/blob/foxy/intra_process_demo/include/image_pipeline/watermark_node.hpp
 https:://github.com/ros2/demos/blob/foxy/intra_process_demo/include/image_pipeline/image_view_node.hpp
+
+
+
+
+
+
+
+
+
+
+노드와 노드렛 (Node and nodelet)
+- Node 
+    1. 계산을 수행하는 하나의 프로세스이며 단순한 동작만을 수행하고 다른 노드와 독립적인 특징을 가진다. 
+    2. 장점으로는 전체 시스템이 노드 하나의 오류만으로 무너지지 않고 한가지 기능에 집중하여 빠르게 개발될 수 있다는 점과 모듈성, 재활용성 과 같은 장점을 가지고 있다. 
+    3. ' 일반적 ' 으로는 하나의 로봇은 여러개의 노드로 이루어 진다.
+    4. !! 단일 컴퓨팅 시스템에서 (SBC 와 같은) 여러개의 노드를 실행시킬때 데이터 통신을 위한 작업으로 인한 전체적인 성능 저하와 메모리 사용량이 늘어난다는 단점이 있다. -> 이를 해결하기 위해 ROS1 에서 Nodelets 패키지를 제공한다. 
+    5. Nodelets 패키지는 단일 프로세스에서 동작되는 복수개의 노드들을 위한 zero-copy 를 제공하여 publisher 와 subscriber 간의 데이터 통신에 있어서 고정된 메모리 공간을 사용하도록 하는 기능을 가지고 있다. (Zero-copy는 데이터를 전송할 때 중간 버퍼링이나 추가적인 데이터 복사 작업 없이 메모리에서 메모리로 직접 데이터를 전송하는 기법을 말합니다.)
+
+    
